@@ -9,7 +9,7 @@ import { Building2, Home, Key, MapPin, Phone, Mail, Award, Briefcase } from 'luc
 
 // Configuration
 const CONFIG = {
-  videoUrl: 'https://storage.googleapis.com/msgsndr/WfO0xV79Z9pS09UjWpWf/media/66239103e659b81682705e3a.mp4',
+  youtubeId: '2pdcz9p4SwY',
   bgImages: [
     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1920',
     'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=1920',
@@ -21,15 +21,6 @@ const CONFIG = {
 
 export default function App() {
   const [showIntro, setShowIntro] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (!showIntro && videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Autoplay prevented:", error);
-      });
-    }
-  }, [showIntro]);
 
   return (
     <div className="relative w-full h-screen bg-[#0a0a0a] overflow-hidden font-sans text-white">
@@ -117,15 +108,14 @@ export default function App() {
                 <div className="absolute -bottom-1 -right-1 w-8 h-8 border-b-2 border-r-2 border-amber-500 rounded-br-lg" />
 
                 <div className="relative aspect-[9/16] h-[65vh] md:h-[70vh] rounded-xl overflow-hidden bg-black ring-1 ring-white/10">
-                  <video 
-                    ref={videoRef}
-                    src={CONFIG.videoUrl} 
-                    autoPlay 
-                    muted={false}
-                    loop
-                    playsInline 
-                    className="w-full h-full object-cover"
-                  />
+                  <iframe 
+                    src={`https://www.youtube.com/embed/${CONFIG.youtubeId}?autoplay=1&mute=0&controls=1&loop=1&playlist=${CONFIG.youtubeId}`}
+                    title="YouTube video player" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowFullScreen
+                    className="w-full h-full border-none"
+                  ></iframe>
                   
                   {/* Status Overlay */}
                   <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
